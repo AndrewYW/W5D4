@@ -36,19 +36,69 @@ function exp2(base, exp) {
 }
 
 function fibonacci(n) {
+  if (n < 3){
+    return [0,1].slice(0, n);
+  }
+
+  let res = fibonacci(n-1);
+  res.push(res[res.length - 1] + res[res.length - 2]);
   
+  return res;
 }
 
 function deepdup(arr) {
+  if (!(arr instanceof Array)) {
+    return arr;
+  }
 
+  return arr.map((ele) => {
+    return deepdup(ele);
+  });
 }
 
 function bsearch(arr, target) {
+  if (arr.length === 0) {
+    return -1;
+  }
 
+  const mid = Math.floor(arr.length / 2);
+  const midEle = arr[mid];
+
+  if (target === midEle) {
+    return mid;
+  } else if (target < midEle) {
+    const left = arr.slice(0, mid);
+    return bsearch(left, target);
+  } else {
+    const right = arr.slice(mid + 1);
+    const res = bsearch(right, target);
+  }
+
+  return res === -1 ? -1 : res + (mid + 1);
 }
 
 function mergesort(arr) {
+  if (arr.length < 2) {
+    return arr;
+  } else { 
+    const mid = Math.floor(arr.length / 2);
 
+    const left = mergesort(arr.slice(0, mid));
+    const right = mergesort(arr.slice(mid));
+
+    return merge(left, right);
+  }
+}
+
+function merge(left, right) {
+  const res = [];
+
+  while (left.length > 0 && right.length > 0) {
+    let ele = (left[0] < right[0] ? left.shift() : right.shift());
+    res.push(ele);
+  }
+
+  return res.concat(left, right);
 }
 
 function subsets(arr) {
