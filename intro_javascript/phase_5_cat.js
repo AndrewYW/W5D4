@@ -16,4 +16,12 @@ Cat.prototype.meow = function() {
 };
 
 
+const cat1 = new Cat("Bob", "Bib");
+const cat2 = new Cat("Ted", "Tod");
 
+cat1.meow = function() {
+  return 'purr';
+}
+
+console.log(cat1.meow);
+console.log(cat2.meow);
