@@ -102,5 +102,14 @@ function merge(left, right) {
 }
 
 function subsets(arr) {
+  if (arr.length === 0) {
+    return [[]];
+  }
 
+  const first = arr[0];
+  const rest = subsets(arr.slice(1));
+
+  const merged = rest.map(subset => [first].concat(subset));
+
+  return res.concat(merged);
 }
